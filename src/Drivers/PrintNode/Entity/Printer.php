@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 use JsonSerializable;
 use PrintNode\Client;
+use PrintNode\Entity\Computer;
 use PrintNode\Entity\Printer as PrintNodePrinter;
 use Rawilk\Printing\Contracts\Printer as PrinterContract;
 
@@ -40,6 +41,15 @@ class Printer implements PrinterContract, Arrayable, JsonSerializable
         return (string) $this->printer->id;
     }
 
+    public function computer(): ?Computer
+    {
+        if($this->printer && $this->printer->computer instanceof Computer) {
+            return $this->printer->computer;
+        } else {
+            return null;
+        }
+    }
+
     public function isOnline(): bool
     {
         return $this->status() === 'online';
@@ -69,6 +79,7 @@ class Printer implements PrinterContract, Arrayable, JsonSerializable
     {
         return [
             'id' => $this->id(),
+            'computer' => $this->computer(),
             'name' => $this->name(),
             'description' => $this->description(),
             'online' => $this->isOnline(),
