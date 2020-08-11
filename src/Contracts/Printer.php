@@ -3,6 +3,7 @@
 namespace Rawilk\Printing\Contracts;
 
 use Illuminate\Support\Collection;
+use PrintNode\Entity\Computer;
 
 interface Printer
 {
@@ -11,6 +12,8 @@ interface Printer
     public function description(): ?string;
 
     public function id();
+
+    public function computer(): ?Computer;
 
     public function isOnline(): bool;
 
