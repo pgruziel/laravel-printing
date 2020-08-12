@@ -5,12 +5,14 @@ namespace Rawilk\Printing;
 use Rawilk\Printing\Contracts\Printer;
 use Rawilk\Printing\Contracts\PrintTask as PrintTaskContract;
 use Rawilk\Printing\Exceptions\InvalidSource;
+use Rawilk\Printing\Drivers\PrintNode\ContentType;
 
 abstract class PrintTask implements PrintTaskContract
 {
     protected string $jobTitle = '';
     protected array $options = [];
     protected string $content = '';
+    protected string $contentType = ContentType::RAW_BASE64;
     protected string $printSource;
 
     /** @var string|mixed */
@@ -19,6 +21,13 @@ abstract class PrintTask implements PrintTaskContract
     public function __construct()
     {
         $this->printSource = config('app.name');
+    }
+
+    public function contentType($contentType): self
+    {
+        $this->contentType = $contentType;
+
+        return $this;
     }
 
     public function content($content): self

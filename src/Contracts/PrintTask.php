@@ -4,6 +4,8 @@ namespace Rawilk\Printing\Contracts;
 
 interface PrintTask
 {
+    public function contentType($contentType): self;
+
     public function content($content): self;
 
     public function file(string $filePath): self;

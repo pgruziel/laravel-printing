@@ -28,7 +28,7 @@ class PrintTask extends BasePrintTask
     public function content($content): self
     {
         $this->job->content = base64_encode($content);
-        $this->job->contentType = ContentType::RAW_BASE64;
+        $this->job->contentType = $this->contentType;
 
         return $this;
     }
